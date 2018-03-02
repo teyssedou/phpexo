@@ -44,11 +44,35 @@ include 'utils/bdd.php';
     <input type="date" name="date" id="" required>
 
     <input type="submit" value="Créer">
+    </form>
+
     <?php
+        } elseif (($_POST['rubrique']) === 'evenement') {
+            ?>
+    
+    <form method="post">
+    <h2>Création d'un nouvel Évènement</h2>
+    <h5>Titre :</h5>
+    <input required name="title" type="text">
+    
+    <h5>Image :</h5>
+    <input type="url" name="img" placeholder="Lien URL">
+   
+    <h5>Intro :</h5>
+    <input type="text" name="intro" required>
+    
+    <h5>Description :</h5>
+    <textarea required id="message" name="descri" cols="30" rows="10"></textarea>
+    
+    <h5>Date :</h5>
+    <input type="date" name="date" id="" required>
+
+    <input type="submit" value="Créer">
+    </form>
+        <?php
         }
     }
-?>
-    <?php
+
     if (!empty($_POST['title'])) {
         $title = $_POST['title'];
         $img = $_POST['img'];
@@ -65,8 +89,24 @@ include 'utils/bdd.php';
         //on fait notre requète
         $requete = "INSERT INTO Blog VALUES(NULL, '$title', '$img', '$intro', '$descri', '$date')";
         $resultat = mysqli_query($connection, $requete) or die('ERREUR SQL : '.$requete.mysqli_error($connection));
-    } ?>
+    } elseif (!empty($_POST['title'])) {
+        $title = $_POST['title'];
+        $img = $_POST['img'];
+        $intro = $_POST['intro'];
+        $descri = $_POST['descri'];
+        $date = $_POST['date'];
 
-</form>
+        echo 'Votre evenement a été bien ajouté';
+
+        // Checker la connection
+        if ($connection->connect_error) {
+            die('Connection failed: '.$connection->connect_error);
+        }
+        //on fait notre requète
+        $requete = "INSERT INTO evenement VALUES(NULL, '$title', '$img', '$intro', '$descri', '$date')";
+        $resultat = mysqli_query($connection, $requete) or die('ERREUR SQL : '.$requete.mysqli_error($connection));
+    }
+    ?>
+
 </body>
 </html>
