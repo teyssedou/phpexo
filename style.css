@@ -7,7 +7,17 @@
     position: sticky;
     top: 0;
 }
+#text{
+    text-align: justify;
+    width: 90%;
+    margin: 10px auto;
+    background-color: rgba(128, 128, 128, 0.356);
+  }
 
+#h2{
+    color: red;
+    text-align: center;
+}
 #contact {
     text-align: center;
     display: flex;

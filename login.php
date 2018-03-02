@@ -1,14 +1,19 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+include 'menu.php';
+include 'utils/bdd.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <title>Login</title>
 </head>
 <body>
-<?php include 'index.php'; ?>
+
 <h2>Inscrivez-vous</h2>
 
 <form id="account" method="post" action="">
@@ -26,12 +31,6 @@ if (!empty($_POST['username'])) {
     $mdp2 = $_POST['password2'];
     $cachemdp = hash('sha512', $_POST['password1']); //masque le mot de passe
 
-    $servername = 'localhost';
-    $username = 'root';
-    $password = 'simplonco';
-    $dbname = 'phptest';
-
-    $connection = new mysqli($servername, $username, $password, $dbname);
     $requete = "SELECT username FROM account WHERE username='$user'";
     $resultat = mysqli_query($connection, $requete) or die('Erreur SQL !<br />'.$requete.'<br />'.mysqli_error($connection));
 
@@ -66,20 +65,11 @@ if (!empty($_POST['name'])) {
     $pass = $_POST['pass'];
     $cachemdp2 = hash('sha512', $_POST['pass']); //masque le mot de passe
 
-    $servername = 'localhost';
-    $username = 'root';
-    $password = 'simplonco';
-    $dbname = 'phptest';
+    $requete1 = "SELECT * FROM account WHERE username='$nom' AND motdepasse='$cachemdp2'";
+    $resultat1 = mysqli_query($connection, $requete1) or die('Erreur SQL !<br />'.$requete1.'<br />'.mysqli_error($connection));
 
-    $connection1 = new mysqli($servername, $username, $password, $dbname);
-    $requete1 = "SELECT * FROM account WHERE username='$nom'";
-    $requete2 = "SELECT * FROM account WHERE motdepasse='$cachemdp2'";
-    $resultat1 = mysqli_query($connection1, $requete1) or die('Erreur SQL !<br />'.$requete1.'<br />'.mysqli_error($connection1));
-    $resultat2 = mysqli_query($connection1, $requete2) or die('Erreur SQL !<br />'.$requete2.'<br />'.mysqli_error($connection1));
-
-    if (($resultat1->num_rows) && ($resultat2->num_rows)) {
-        echo 'Vous êtes connecté';
-        header('Location: /home.php');
+    if (($resultat1->num_rows)) {
+        header('Location: /index.php');
         $_SESSION['nom'] = $nom;
     } else {
         echo'Identifiant / Mot de passe incorect';

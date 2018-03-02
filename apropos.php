@@ -1,16 +1,18 @@
-<?php session_start(); ?>
+<?php session_start();
+include 'menu.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <title>A Propos</title>
 </head>
 <body>
-<?php include 'index.php'; ?>
-<section>
-<h2>A Propos</h2>
+<section id="text">
+<h2 id="h2">A Propos</h2>
 <p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut velit massa. Praesent hendrerit massa non urna egestas, ut congue augue mattis. Phasellus justo nisl, sodales ut tristique vitae, tincidunt at sapien. Aenean eleifend aliquet nisi, non finibus est venenatis volutpat. Etiam in eros eget dolor ultricies viverra a a libero. Vivamus enim tellus, elementum eu arcu in, tincidunt rhoncus enim. Morbi dapibus massa sit amet nisi dignissim, a porttitor dolor placerat.
 </p><p>
